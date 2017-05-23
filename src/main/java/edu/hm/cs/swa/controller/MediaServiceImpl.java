@@ -17,6 +17,8 @@ public class MediaServiceImpl implements MediaService {
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
 
+    private HashMap
+
 
     /**
      * Default c'tor.

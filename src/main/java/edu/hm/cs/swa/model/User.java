@@ -6,6 +6,8 @@ package edu.hm.cs.swa.model;
  */
 public class User {
 
+    private String userName;
+
     private String firstName;
 
     private String lastName;
@@ -15,7 +17,8 @@ public class User {
     private int age;
 
 
-    public User(final String firstName, final String lastName, final String password, final int age) {
+    public User(final String userName, final String firstName, final String lastName, final String password, final int age) {
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -40,6 +43,11 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+
+    public String getUserName() {
+        return userName;
     }
 
 
