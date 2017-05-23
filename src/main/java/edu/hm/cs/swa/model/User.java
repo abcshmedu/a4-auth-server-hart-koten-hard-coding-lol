@@ -23,12 +23,14 @@ public class User {
     }
 
 
-    public String getFirstName() {
-        return firstName;
+    public boolean isOVer18() {
+        return age >= 18;
     }
 
 
-
+    public String getFirstName() {
+        return firstName;
+    }
 
 
     public String getLastName() {

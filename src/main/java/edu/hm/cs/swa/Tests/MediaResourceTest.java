@@ -1,8 +1,8 @@
 package edu.hm.cs.swa.Tests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import static org.junit.Assert.fail;
 
 public class MediaResourceTest {
 

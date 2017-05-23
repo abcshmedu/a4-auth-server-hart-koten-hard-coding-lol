@@ -11,9 +11,6 @@ import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * REST-API for ShareIt Service.
@@ -93,12 +90,12 @@ public class MediaResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBooks() {
         //return (Book[]) ms.getBooks();
-        Book[] allBooks =  ms.getBooks();
+        Book[] allBooks = ms.getBooks();
 
         JSONArray jsonArray = new JSONArray();
         ObjectMapper mapper = new ObjectMapper();
 
- //       List<Book> allB = Arrays.stream(allBooks).collect(Collectors.toList());
+        //       List<Book> allB = Arrays.stream(allBooks).collect(Collectors.toList());
         try {
             String result = mapper.writeValueAsString(allBooks);
             return Response.status(Response.Status.OK).entity(result).build();
