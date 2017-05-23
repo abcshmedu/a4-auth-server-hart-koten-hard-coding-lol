@@ -153,7 +153,7 @@ public class MediaServiceImpl implements MediaService {
             int tot = 0;
             for (int i = 0; i < 12; i++) {
                 int digit = Integer.parseInt(isbn.substring(i, i + 1));
-                tot += (i % 2 == 0) ? digit * 1 : digit * 3;
+                tot += (i % 2 == 0) ? digit : digit * 3;
             }
 
             //checksum must be 0-9. If calculated as 10 then = 0
