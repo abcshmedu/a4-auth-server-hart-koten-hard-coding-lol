@@ -43,17 +43,6 @@ public class MediaResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createBook(Book book) {
         MediaServiceResult msr = ms.addBook(book);
-        //      JSONObject json = new JSONObject();
-//        json.put("status:", msr.getStatus());
-
-        //    return Response.status(msr.getCode()).entity(json).build();
-        //ObjectMapper mapper = new ObjectMapper();
-        //String json = "";
-        //try {
-        //  json = mapper.writeValueAsString(msr.getStatus());
-        //} catch (JsonProcessingException e) {
-        //  e.printStackTrace();
-        //}
         return Response.status(msr.getCode()).build();
     }
 
@@ -95,7 +84,6 @@ public class MediaResource {
         JSONArray jsonArray = new JSONArray();
         ObjectMapper mapper = new ObjectMapper();
 
-        //       List<Book> allB = Arrays.stream(allBooks).collect(Collectors.toList());
         try {
             String result = mapper.writeValueAsString(allBooks);
             return Response.status(Response.Status.OK).entity(result).build();

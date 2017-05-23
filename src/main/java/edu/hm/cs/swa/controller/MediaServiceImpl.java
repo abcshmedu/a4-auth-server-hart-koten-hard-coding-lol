@@ -14,6 +14,7 @@ import java.util.HashMap;
  */
 public class MediaServiceImpl implements MediaService {
 
+    public static final int THREE = 3;
     public static final int TEN = 10;
     public static final int TWELVE = 12;
     public static final int THIRTEEN = 13;
@@ -40,11 +41,11 @@ public class MediaServiceImpl implements MediaService {
 
         if (!validISBN(newBook.getIsbn())) {
             msr = MediaServiceResult.INVALID_ISBN;
-        } else if (newBook.getIsbn() == null) {
+        } else if (newBook.getIsbn().equals("")) {
             msr = MediaServiceResult.ISBN_NOT_FOUND;
         } else if (bookHashMap.containsKey(newBook.getIsbn())) {
             msr = MediaServiceResult.ISBN_TAKEN;
-        } else if (newBook.getAuthor() == null || newBook.getTitle() == null) {
+        } else if (newBook.getAuthor().equals("") || newBook.getTitle().equals("")) {
             msr = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
         } else {
             bookHashMap.put(newBook.getIsbn(), newBook);
@@ -58,11 +59,11 @@ public class MediaServiceImpl implements MediaService {
     public MediaServiceResult addDisc(Disc newDisc) {
         MediaServiceResult msr = MediaServiceResult.OK;
 
-        if (newDisc.getBarcode() == null) {
+        if (newDisc.getBarcode().equals("")) {
             msr = MediaServiceResult.ISBN_NOT_FOUND;
         } else if (discHashMap.containsKey(newDisc.getBarcode())) {
             msr = MediaServiceResult.ISBN_TAKEN;
-        } else if (newDisc.getDirector() == null || newDisc.getTitle() == null) {
+        } else if (newDisc.getDirector().equals("") || newDisc.getTitle().equals("")) {
             msr = MediaServiceResult.AUTHOR_OR_TITLE_MISSING;
         } else {
             discHashMap.put(newDisc.getBarcode(), newDisc);
@@ -166,7 +167,7 @@ public class MediaServiceImpl implements MediaService {
             int tot = 0;
             for (int i = 0; i < TWELVE; i++) {
                 int digit = Integer.parseInt(isbn.substring(i, i + 1));
-                tot += (i % 2 == 0) ? digit : digit * 3;
+                tot += (i % 2 == 0) ? digit : digit * THREE;
             }
 
             //checksum must be 0-9. If calculated as 10 then = 0
@@ -175,7 +176,7 @@ public class MediaServiceImpl implements MediaService {
                 checksum = 0;
             }
 
-            return checksum == Integer.parseInt(isbn.substring(12));
+            return checksum == Integer.parseInt(isbn.substring(TWELVE));
         } catch (NumberFormatException nfe) {
             //to catch invalid ISBNs that have non-numeric characters in them
             return false;
