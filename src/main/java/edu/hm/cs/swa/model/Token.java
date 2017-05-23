@@ -8,6 +8,8 @@ public class Token {
 
     private final String tokenstr;
 
+    private long timestamp;
+
 
     /**
      * constructor for class token.

@@ -16,13 +16,18 @@ import javax.ws.rs.core.Response;
  */
 
 @Singleton
-@Path("/user")
+@Path("/auth/")
 public class AuthResource {
+
+    private AuthServiceImpl as = new AuthServiceImpl();
+
 
     /**
      * Defualt con.
      */
     public AuthResource() {
+        User kevin = new User("Chicksterminator", "Kevin", "penopt", "20quicksniperlord05", 12);
+
     }
 
 
@@ -37,7 +42,8 @@ public class AuthResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(User user) {
-        MediaServiceResult msr =
+        MediaServiceResult msr = as.login(user);
+        return Response.status(msr.getCode()).build();
 
     }
 }

@@ -42,7 +42,6 @@ public interface MediaService {
      */
     Medium[] getDiscs();
 
-    MediaServiceResult login(User user);
 
     /**
      * Get a specific book, identified by the isbn.
@@ -75,13 +74,5 @@ public interface MediaService {
      * @return status code indicating success or failure.
      */
     MediaServiceResult updateDisc(Disc oldDisc);
-
-    /**
-     * login a user
-     *
-     * @param user who wants to log in
-     * @return some status stuff
-     */
-    MediaServiceResult login(Authentication.User user);
 
 }

@@ -24,8 +24,6 @@ public class MediaServiceImpl implements MediaService {
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
 
-    private HashSet<User> userHashMap = new HashSet<>();
-
     private String isbn;
 
 
@@ -33,8 +31,7 @@ public class MediaServiceImpl implements MediaService {
      * Default c'tor.
      */
     public MediaServiceImpl() {
-        User kevin = new User("Chicksterminator", "Kevin", "penopt", "20quicksniperlord05", TWELVE);
-        userHashMap.add(kevin);
+
     }
 
 
@@ -139,22 +136,6 @@ public class MediaServiceImpl implements MediaService {
     }
 
 
-    @Override
-    public MediaServiceResult login(final User user) {
-        final MediaServiceResult result;
-
-        if (user == null) {
-            result = MediaServiceResult.AUTHORIZATION;
-        } else if (!userHashMap.contains(user)) {
-            result = MediaServiceResult.AUTHORIZATION;
-        } else if (user.getUserToken() != null) {
-            result = MediaServiceResult.OK;
-        } else {
-            user.setUserToken(generateToken(user));
-            result = MediaServiceResult.OK;
-        }
-        return result;
-    }
 
 
     @Override
@@ -207,17 +188,6 @@ public class MediaServiceImpl implements MediaService {
     }
 
 
-    private Token generateToken(User user) {
-        String userName = user.getUserName();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-        String password = user.getPassword();
-        int age = user.getAge();
-        String time = System.currentTimeMillis() + "";
-        String timeandPassword = time + password;
-        String passAndTimeHash = Math.abs((timeandPassword.hashCode())) + "";
-        String tokenstr = userName + "-" + passAndTimeHash + "-" + firstName + "-" + lastName + "-" + age;
-        return new Token(tokenstr);
-    }
+
 }
 
