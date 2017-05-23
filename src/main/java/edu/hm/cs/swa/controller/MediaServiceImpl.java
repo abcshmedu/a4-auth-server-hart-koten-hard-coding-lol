@@ -32,7 +32,7 @@ public class MediaServiceImpl implements MediaService {
      * Default c'tor.
      */
     public MediaServiceImpl() {
-        User kevin = new User("Chicksterminator", "Kevin", "penopt", "quicksniperlord99", 12);
+        User kevin = new User("Chicksterminator", "Kevin", "penopt", "20quicksniperlord05", TWELVE);
         userHashMap.put(kevin, generateToken(kevin));
     }
 
