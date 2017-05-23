@@ -3,6 +3,7 @@ package edu.hm.cs.swa.controller;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
+import edu.hm.cs.swa.model.User;
 
 import java.util.HashMap;
 
@@ -13,11 +14,16 @@ import java.util.HashMap;
  */
 public class MediaServiceImpl implements MediaService {
 
+    public static final int TEN = 10;
+    public static final int TWELVE = 12;
+    public static final int THIRTEEN = 13;
+
     private HashMap<String, Book> bookHashMap = new HashMap<>();
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
 
-    private HashMap
+    private HashMap<String, User> userHashMap = new HashMap<>();
+    private String isbn;
 
 
     /**
@@ -140,6 +146,11 @@ public class MediaServiceImpl implements MediaService {
     }
 
 
+    /**
+     * Validate isbn.
+     * @param isbn Isbn number.
+     * @return true if valid, else false.
+     */
     private boolean validISBN(String isbn) {
         if (isbn == null) {
             return false;
@@ -147,20 +158,20 @@ public class MediaServiceImpl implements MediaService {
 
         isbn = isbn.replaceAll("-", "");
 
-        if (isbn.length() != 13) {
+        if (isbn.length() != THIRTEEN) {
             return false;
         }
 
         try {
             int tot = 0;
-            for (int i = 0; i < 12; i++) {
+            for (int i = 0; i < TWELVE; i++) {
                 int digit = Integer.parseInt(isbn.substring(i, i + 1));
                 tot += (i % 2 == 0) ? digit : digit * 3;
             }
 
             //checksum must be 0-9. If calculated as 10 then = 0
-            int checksum = 10 - (tot % 10);
-            if (checksum == 10) {
+            int checksum = TEN - (tot % TEN);
+            if (checksum == TEN) {
                 checksum = 0;
             }
 
