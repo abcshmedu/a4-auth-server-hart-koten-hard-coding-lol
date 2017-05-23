@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hm.cs.swa.model.Book;
 import edu.hm.cs.swa.model.Disc;
 import edu.hm.cs.swa.model.Medium;
+import edu.hm.cs.swa.model.User;
 import org.json.JSONArray;
 
 import javax.inject.Singleton;
@@ -188,5 +189,15 @@ public class MediaResource {
         MediaServiceResult msr = ms.updateDisc(disc);
 
         return Response.status(msr.getCode()).entity(msr.getStatus()).build();
+    }
+
+
+    @POST
+    @Path("user")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(User user) {
+        System.out.println("jo digga bin voll eingeloggt also kom ich hier vorbei geiler scheiße ne");
+        return Response.status(0).build();
     }
 }

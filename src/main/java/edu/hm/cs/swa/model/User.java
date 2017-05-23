@@ -16,6 +16,8 @@ public class User {
 
     private int age;
 
+    private Token userToken;
+
 
     public User(final String userName, final String firstName, final String lastName, final String password, final int age) {
         this.userName = userName;
@@ -53,5 +55,15 @@ public class User {
 
     public int getAge() {
         return age;
+    }
+
+
+    public Token getUserToken() {
+        return userToken;
+    }
+
+
+    public void setUserToken(final Token userToken) {
+        this.userToken = userToken;
     }
 }

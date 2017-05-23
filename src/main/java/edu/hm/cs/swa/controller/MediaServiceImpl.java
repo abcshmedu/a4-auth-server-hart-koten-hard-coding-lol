@@ -3,6 +3,7 @@ package edu.hm.cs.swa.controller;
 import edu.hm.cs.swa.model.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Implementation of the MediaService.
@@ -23,7 +24,7 @@ public class MediaServiceImpl implements MediaService {
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
 
-    private HashMap<User, Token> userHashMap = new HashMap<>();
+    private HashSet<User> userHashMap = new HashSet<>();
 
     private String isbn;
 
@@ -33,7 +34,7 @@ public class MediaServiceImpl implements MediaService {
      */
     public MediaServiceImpl() {
         User kevin = new User("Chicksterminator", "Kevin", "penopt", "20quicksniperlord05", TWELVE);
-        userHashMap.put(kevin, generateToken(kevin));
+        userHashMap.add(kevin);
     }
 
 
@@ -98,6 +99,7 @@ public class MediaServiceImpl implements MediaService {
             counter++;
         }
         return allDiscs;
+
     }
 
 
@@ -133,6 +135,24 @@ public class MediaServiceImpl implements MediaService {
             result = MediaServiceResult.OK;
         }
 
+        return result;
+    }
+
+
+    @Override
+    public MediaServiceResult login(final User user) {
+        final MediaServiceResult result;
+
+        if (user == null) {
+            result = MediaServiceResult.AUTHORIZATION;
+        } else if (!userHashMap.contains(user)) {
+            result = MediaServiceResult.AUTHORIZATION;
+        } else if (user.getUserToken() != null) {
+            result = MediaServiceResult.OK;
+        } else {
+            user.setUserToken(generateToken(user));
+            result = MediaServiceResult.OK;
+        }
         return result;
     }
 
