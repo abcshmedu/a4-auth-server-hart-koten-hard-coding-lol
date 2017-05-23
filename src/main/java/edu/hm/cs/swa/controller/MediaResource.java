@@ -104,9 +104,6 @@ public class MediaResource {
             e.printStackTrace();
         }
 
-        for (Medium book : allBooks) {
-
-        }
         return Response.status(Response.Status.OK).entity(jsonArray.toString()).build();
     }
 
