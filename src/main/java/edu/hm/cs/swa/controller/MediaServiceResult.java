@@ -8,7 +8,9 @@ import javax.ws.rs.core.Response.Status;
  */
 public enum MediaServiceResult {
 
-    OK(Status.OK.getStatusCode(), "OK."), INVALID_ISBN(Status.NOT_ACCEPTABLE.getStatusCode(),
+    OK(Status.OK.getStatusCode(), "OK."),
+    AUTHORIZATION(Status.UNAUTHORIZED.getStatusCode(), "You have no power here!"),
+    INVALID_ISBN(Status.NOT_ACCEPTABLE.getStatusCode(),
             "Your ISBN-13 is invalid."), ISBN_TAKEN(Status.GONE.getStatusCode(),
             "This ISBN-13 is already taken."), AUTHOR_OR_TITLE_MISSING(Status.PARTIAL_CONTENT.getStatusCode(),
             "Author or title is missing"), ISBN_NOT_FOUND(Status.NOT_FOUND.getStatusCode(),
