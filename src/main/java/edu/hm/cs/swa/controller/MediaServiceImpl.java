@@ -1,9 +1,6 @@
 package edu.hm.cs.swa.controller;
 
-import edu.hm.cs.swa.model.Book;
-import edu.hm.cs.swa.model.Disc;
-import edu.hm.cs.swa.model.Medium;
-import edu.hm.cs.swa.model.User;
+import edu.hm.cs.swa.model.*;
 
 import java.util.HashMap;
 
@@ -15,15 +12,19 @@ import java.util.HashMap;
 public class MediaServiceImpl implements MediaService {
 
     public static final int THREE = 3;
+
     public static final int TEN = 10;
+
     public static final int TWELVE = 12;
+
     public static final int THIRTEEN = 13;
 
     private HashMap<String, Book> bookHashMap = new HashMap<>();
 
     private HashMap<String, Disc> discHashMap = new HashMap<>();
 
-    private HashMap<String, User> userHashMap = new HashMap<>();
+    private HashMap<User, Token> userHashMap = new HashMap<>();
+
     private String isbn;
 
 
@@ -31,7 +32,8 @@ public class MediaServiceImpl implements MediaService {
      * Default c'tor.
      */
     public MediaServiceImpl() {
-
+        User kevin = new User("Chicksterminator", "Kevin", "penopt", "quicksniperlord99", 12);
+        userHashMap.put(kevin, generateToken(kevin));
     }
 
 
@@ -149,6 +151,7 @@ public class MediaServiceImpl implements MediaService {
 
     /**
      * Validate isbn.
+     *
      * @param isbn Isbn number.
      * @return true if valid, else false.
      */
@@ -181,6 +184,20 @@ public class MediaServiceImpl implements MediaService {
             //to catch invalid ISBNs that have non-numeric characters in them
             return false;
         }
+    }
+
+
+    private Token generateToken(User user) {
+        String userName = user.getUserName();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        String password = user.getPassword();
+        int age = user.getAge();
+        String time = System.currentTimeMillis() + "";
+        String timeandPassword = time + password;
+        String passAndTimeHash = Math.abs((timeandPassword.hashCode())) + "";
+        String tokenstr = userName + "-" + passAndTimeHash + "-" + firstName + "-" + lastName + "-" + age;
+        return new Token(tokenstr);
     }
 }
 
