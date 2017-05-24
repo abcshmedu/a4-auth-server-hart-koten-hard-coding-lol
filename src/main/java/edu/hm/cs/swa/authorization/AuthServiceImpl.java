@@ -1,5 +1,6 @@
-package edu.hm.cs.swa.controller;
+package edu.hm.cs.swa.authorization;
 
+import edu.hm.cs.swa.controller.MediaServiceResult;
 import edu.hm.cs.swa.model.Token;
 import edu.hm.cs.swa.model.User;
 
@@ -13,15 +14,22 @@ public class AuthServiceImpl {
 
     private HashSet<User> userHashSet = new HashSet<>();
 
-
+    /**
+     * Constructor.
+     */
     public AuthServiceImpl() {
     }
 
 
+    /**
+     * Login and authenticate.
+     * @param user User that requests something.
+     * @return Status code.
+     */
     public MediaServiceResult login(final User user) {
         final MediaServiceResult result;
 
-        System.out.println("alter ich bin hier also ich nich alles so schlimm wie du dachtest");
+        System.out.println("Login requested.");
 
         if (user == null) {
             result = MediaServiceResult.AUTHORIZATION;
@@ -36,7 +44,11 @@ public class AuthServiceImpl {
         return result;
     }
 
-
+    /**
+     * Generates a token for a User.
+     * @param user User that is supposed to get a token.
+     * @return Token for user.
+     */
     private Token generateToken(User user) {
         String userName = user.getUserName();
         String firstName = user.getFirstName();

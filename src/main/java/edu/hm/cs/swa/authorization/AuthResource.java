@@ -1,8 +1,8 @@
-package edu.hm.cs.swa.controller;
+package edu.hm.cs.swa.authorization;
 
+import edu.hm.cs.swa.controller.MediaServiceResult;
 import edu.hm.cs.swa.model.User;
 
-import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,15 +15,15 @@ import javax.ws.rs.core.Response;
  * Alle Rechte vorbehalten bei Missbrauch wird zurück Missbraucht
  */
 
-@Singleton
-@Path("/auth/")
+
+@Path("/authentication")
 public class AuthResource {
 
     private AuthServiceImpl as = new AuthServiceImpl();
 
 
     /**
-     * Defualt con.
+     * Default c'tor.
      */
     public AuthResource() {
         User kevin = new User("Chicksterminator", "Kevin", "penopt", "20quicksniperlord05", 12);
@@ -34,16 +34,15 @@ public class AuthResource {
     /**
      * login the user.
      *
-     * @param user the userwho wants to login.
+     * @param user the user who wants to login.
      * @return a Response.
      */
     @POST
-    @Path("login")
+    @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(User user) {
         MediaServiceResult msr = as.login(user);
         return Response.status(msr.getCode()).build();
-
     }
 }
