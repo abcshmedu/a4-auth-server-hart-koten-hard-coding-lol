@@ -3,7 +3,10 @@ package edu.hm.cs.swa.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hm.cs.swa.authorization.AuthServiceImpl;
-import edu.hm.cs.swa.model.*;
+import edu.hm.cs.swa.model.Book;
+import edu.hm.cs.swa.model.Disc;
+import edu.hm.cs.swa.model.Medium;
+import edu.hm.cs.swa.model.Token;
 import org.json.JSONArray;
 
 import javax.inject.Singleton;
@@ -56,7 +59,8 @@ public class MediaResource {
     /**
      * Get a specific book, identified by its isbn.
      *
-     * @param isbn isbn of desired book.
+     * @param isbn  isbn of desired book.
+     * @param token some token
      * @return Response with status code and book as json.
      */
     @GET
@@ -82,6 +86,7 @@ public class MediaResource {
     /**
      * Get all the books available.
      *
+     * @param token some token.
      * @return Response indicating success or failure.
      */
     @GET
@@ -113,7 +118,8 @@ public class MediaResource {
     /**
      * Update an existing book.
      *
-     * @param book Book that needs to be updated.
+     * @param book  Book that needs to be updated.
+     * @param token some token
      * @return Response indicating success or failure.
      */
     @PUT
@@ -133,7 +139,8 @@ public class MediaResource {
     /**
      * Create a new disc.
      *
-     * @param disc Disc that will be created.
+     * @param disc  Disc that will be created.
+     * @param token some token
      * @return Status code indicating success or failure.
      */
     @POST
@@ -154,6 +161,7 @@ public class MediaResource {
      * Get a specific disc, identified by its barcode.
      *
      * @param barcode Barcode of the desired disc.
+     * @param token   some token
      * @return Status code indicating success or failure.
      */
     @GET
@@ -179,13 +187,14 @@ public class MediaResource {
     /**
      * Get a list of available discs.
      *
+     * @param token some token
      * @return Response indicating success or failure.
      */
     @GET
     @Path("/discs")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDiscs(Token token) {
-        if (!AuthServiceImpl.tokenIsValid()) {
+        if (!AuthServiceImpl.tokenIsValid(token)) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
         }
 
@@ -203,7 +212,8 @@ public class MediaResource {
     /**
      * Update an existing disc.
      *
-     * @param disc Disc that needs to be updated.
+     * @param disc  Disc that needs to be updated.
+     * @param token some token
      * @return Response indicating success or failure.
      */
     @PUT

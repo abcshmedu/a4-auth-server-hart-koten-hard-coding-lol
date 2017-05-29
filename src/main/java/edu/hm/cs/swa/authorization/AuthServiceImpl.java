@@ -14,7 +14,9 @@ public class AuthServiceImpl {
 
     private HashSet<User> userHashSet = new HashSet<>();
 
-    private HashSet<Token> tokenHashSet = new HashSet<>();
+    private static HashSet<Token> tokenHashSet = new HashSet<>();
+
+    private static final int fifteenMin = 90000;
 
 
     /**
@@ -55,7 +57,7 @@ public class AuthServiceImpl {
      * @param user User that is supposed to get a token.
      * @return Token for user.
      */
-    private Token generateToken(User user) {
+    public Token generateToken(User user) {
         String userName = user.getUserName();
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
@@ -73,13 +75,13 @@ public class AuthServiceImpl {
     /**
      * check token.
      *
-     * @param token
+     * @param token some token
      * @return
      */
     public static boolean tokenIsValid(Token token) {
-        boolean firstcheck = this.tokenHashSet.contains(token);
+        boolean firstcheck = tokenHashSet.contains(token);
         boolean secondCheck = false;
-        if (System.currentTimeMillis() - token.getTimestamp() < 900000) {
+        if (System.currentTimeMillis() - token.getTimestamp() < fifteenMin) {
             secondCheck = true;
         }
         return firstcheck && secondCheck;
