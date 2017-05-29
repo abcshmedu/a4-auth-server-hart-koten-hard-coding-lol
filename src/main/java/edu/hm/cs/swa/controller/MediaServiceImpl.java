@@ -39,6 +39,8 @@ public class MediaServiceImpl implements MediaService {
     public MediaServiceResult addBook(Book newBook) {
         MediaServiceResult msr = MediaServiceResult.OK;
 
+        System.out.println("hier kommts ne schau her");
+
         if (!validISBN(newBook.getIsbn())) {
             msr = MediaServiceResult.INVALID_ISBN;
         } else if (newBook.getIsbn().equals("")) {

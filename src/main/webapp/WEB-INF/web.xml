@@ -66,13 +66,13 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Media Resource</servlet-name>
-        <url-pattern>/shareit/media/*</url-pattern>
+        <servlet-name>Authentication Service</servlet-name>
+        <url-pattern>/shareit/authentication/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>Authentication Service</servlet-name>
-        <url-pattern>/shareit/authentication/*</url-pattern>
+        <servlet-name>Media Resource</servlet-name>
+        <url-pattern>/shareit/media/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
