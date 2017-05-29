@@ -2,10 +2,8 @@ package edu.hm.cs.swa.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.hm.cs.swa.model.Book;
-import edu.hm.cs.swa.model.Disc;
-import edu.hm.cs.swa.model.Medium;
-import edu.hm.cs.swa.model.User;
+import edu.hm.cs.swa.authorization.AuthServiceImpl;
+import edu.hm.cs.swa.model.*;
 import org.json.JSONArray;
 
 import javax.inject.Singleton;
@@ -35,15 +33,22 @@ public class MediaResource {
     /**
      * Creates a book.
      *
-     * @param book Book that will be created.
+     * @param book  Book that will be created.
+     * @param token some token.
      * @return Response indicating success or failure.
      */
     @POST
     @Path("/books")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createBook(Book book) {
-        MediaServiceResult msr = ms.addBook(book);
+    public Response createBook(Book book, Token token) {
+        MediaServiceResult msr;
+        if (!AuthServiceImpl.tokenIsValid(token)) {
+            msr = MediaServiceResult.AUTHORIZATION;
+        } else {
+            msr = ms.addBook(book);
+        }
+
         return Response.status(msr.getCode()).build();
     }
 
@@ -57,7 +62,11 @@ public class MediaResource {
     @GET
     @Path("/books/{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBook(@PathParam("isbn") String isbn) {
+    public Response getBook(@PathParam("isbn") String isbn, Token token) {
+        if (!AuthServiceImpl.tokenIsValid(token)) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
+        }
+
         final Medium searchedBook = ms.getBook(isbn);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -78,7 +87,11 @@ public class MediaResource {
     @GET
     @Path("/books")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBooks() {
+    public Response getBooks(Token token) {
+        if (!AuthServiceImpl.tokenIsValid(token)) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
+        }
+
         //return (Book[]) ms.getBooks();
         Book[] allBooks = ms.getBooks();
 
@@ -107,7 +120,10 @@ public class MediaResource {
     @Path("/books/{isbn}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateBook(Book book) {
+    public Response updateBook(Book book, Token token) {
+        if (!AuthServiceImpl.tokenIsValid(token)) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
+        }
         MediaServiceResult msr = ms.updateBook(book);
 
         return Response.status(msr.getCode()).entity(msr.getStatus()).build();
@@ -124,7 +140,10 @@ public class MediaResource {
     @Path("/discs")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createDisc(Disc disc) {
+    public Response createDisc(Disc disc, Token token) {
+        if (!AuthServiceImpl.tokenIsValid(token)) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
+        }
         MediaServiceResult msr = ms.addDisc(disc);
 
         return Response.status(msr.getCode()).build();
@@ -140,7 +159,10 @@ public class MediaResource {
     @GET
     @Path("/discs/{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDisc(@PathParam("barcode") String barcode) {
+    public Response getDisc(@PathParam("barcode") String barcode, Token token) {
+        if (!AuthServiceImpl.tokenIsValid(token)) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
+        }
 
         final Medium searchedDisc = ms.getDisc(barcode);
 
@@ -162,7 +184,10 @@ public class MediaResource {
     @GET
     @Path("/discs")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDiscs() {
+    public Response getDiscs(Token token) {
+        if (!AuthServiceImpl.tokenIsValid()) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
+        }
 
         final Disc[] allDiscs = (Disc[]) ms.getDiscs();
 
@@ -185,19 +210,13 @@ public class MediaResource {
     @Path("/discs/{barcode}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateDisc(Disc disc) {
+    public Response updateDisc(Disc disc, Token token) {
+        if (!AuthServiceImpl.tokenIsValid(token)) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
+        }
         MediaServiceResult msr = ms.updateDisc(disc);
 
         return Response.status(msr.getCode()).entity(msr.getStatus()).build();
     }
 
-
-    @POST
-    @Path("user")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response login(User user) {
-        System.out.println("jo digga bin voll eingeloggt also kom ich hier vorbei geiler scheiße ne");
-        return Response.status(0).build();
-    }
 }

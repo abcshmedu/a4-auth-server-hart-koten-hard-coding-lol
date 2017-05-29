@@ -14,6 +14,8 @@ public class AuthServiceImpl {
 
     private HashSet<User> userHashSet = new HashSet<>();
 
+    private HashSet<Token> tokenHashSet = new HashSet<>();
+
 
     /**
      * Constructor.
@@ -59,11 +61,28 @@ public class AuthServiceImpl {
         String lastName = user.getLastName();
         String password = user.getPassword();
         int age = user.getAge();
-        String time = System.currentTimeMillis() + "";
-        String timeandPassword = time + password;
-        String passAndTimeHash = Math.abs((timeandPassword.hashCode())) + "";
+        String passAndTimeHash = Math.abs((password.hashCode())) + "";
         String tokenstr = userName + "-" + passAndTimeHash + "-" + firstName + "-" + lastName + "-" + age;
-        return new Token(tokenstr);
+        Token token = new Token(tokenstr);
+        user.setUserToken(token);
+        this.tokenHashSet.add(token);
+        return token;
+    }
+
+
+    /**
+     * check token.
+     *
+     * @param token
+     * @return
+     */
+    public static boolean tokenIsValid(Token token) {
+        boolean firstcheck = this.tokenHashSet.contains(token);
+        boolean secondCheck = false;
+        if (System.currentTimeMillis() - token.getTimestamp() < 900000) {
+            secondCheck = true;
+        }
+        return firstcheck && secondCheck;
     }
 
 

@@ -17,6 +17,7 @@ public class Token {
      * @param tokenstr the tokenstring.
      */
     public Token(final String tokenstr) {
+        timestamp = System.currentTimeMillis();
         this.tokenstr = tokenstr;
     }
 
@@ -45,5 +46,10 @@ public class Token {
      */
     public String getTokenstr() {
         return tokenstr;
+    }
+
+
+    public long getTimestamp() {
+        return timestamp;
     }
 }

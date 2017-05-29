@@ -1,9 +1,10 @@
 package edu.hm.cs.swa.controller;
 
-import edu.hm.cs.swa.model.*;
+import edu.hm.cs.swa.model.Book;
+import edu.hm.cs.swa.model.Disc;
+import edu.hm.cs.swa.model.Medium;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * Implementation of the MediaService.
@@ -38,8 +39,6 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public MediaServiceResult addBook(Book newBook) {
         MediaServiceResult msr = MediaServiceResult.OK;
-
-        System.out.println("hier kommts ne schau her");
 
         if (!validISBN(newBook.getIsbn())) {
             msr = MediaServiceResult.INVALID_ISBN;
@@ -138,8 +137,6 @@ public class MediaServiceImpl implements MediaService {
     }
 
 
-
-
     @Override
     public Medium getBook(String isbn) {
         return bookHashMap.get(isbn);
@@ -188,8 +185,6 @@ public class MediaServiceImpl implements MediaService {
             return false;
         }
     }
-
-
 
 }
 
