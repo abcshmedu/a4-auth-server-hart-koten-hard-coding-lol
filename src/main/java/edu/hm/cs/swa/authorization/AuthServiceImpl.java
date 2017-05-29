@@ -14,6 +14,7 @@ public class AuthServiceImpl {
 
     private HashSet<User> userHashSet = new HashSet<>();
 
+
     /**
      * Constructor.
      */
@@ -23,6 +24,7 @@ public class AuthServiceImpl {
 
     /**
      * Login and authenticate.
+     *
      * @param user User that requests something.
      * @return Status code.
      */
@@ -44,8 +46,10 @@ public class AuthServiceImpl {
         return result;
     }
 
+
     /**
      * Generates a token for a User.
+     *
      * @param user User that is supposed to get a token.
      * @return Token for user.
      */
@@ -60,6 +64,16 @@ public class AuthServiceImpl {
         String passAndTimeHash = Math.abs((timeandPassword.hashCode())) + "";
         String tokenstr = userName + "-" + passAndTimeHash + "-" + firstName + "-" + lastName + "-" + age;
         return new Token(tokenstr);
+    }
+
+
+    /**
+     * adds a new User to the set.
+     *
+     * @param user the new user
+     */
+    public void addUser(User user) {
+        this.userHashSet.add(user);
     }
 
 }
