@@ -51,7 +51,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet>
+<!--    <servlet>
         <servlet-name>Authentication Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
@@ -68,11 +68,11 @@
     <servlet-mapping>
         <servlet-name>Authentication Service</servlet-name>
         <url-pattern>/shareit/authentication/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
     <servlet-mapping>
         <servlet-name>Media Resource</servlet-name>
-        <url-pattern>/shareit/media/*</url-pattern>
+        <url-pattern>/shareit/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

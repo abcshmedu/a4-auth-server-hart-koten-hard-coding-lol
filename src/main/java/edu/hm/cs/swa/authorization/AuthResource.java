@@ -27,7 +27,6 @@ public class AuthResource {
      */
     public AuthResource() {
         User kevin = new User("Chicksterminator", "Kevin", "penopt", "20quicksniperlord05", 12);
-
     }
 
 
