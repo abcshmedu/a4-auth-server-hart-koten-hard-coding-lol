@@ -64,9 +64,9 @@ public class MediaResource {
      * @return Response with status code and book as json.
      */
     @GET
-    @Path("/books/{isbn}")
+    @Path("/books/{isbn}/{token}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBook(@PathParam("isbn") String isbn, Token token) {
+    public Response getBook(@PathParam("isbn") String isbn, @PathParam("token") Token token) {
         if (!AuthServiceImpl.tokenIsValid(token)) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
         }
@@ -90,9 +90,9 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @GET
-    @Path("/books")
+    @Path("/books/{token}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBooks(Token token) {
+    public Response getBooks(@PathParam("token") Token token) {
         if (!AuthServiceImpl.tokenIsValid(token)) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
         }
@@ -165,9 +165,9 @@ public class MediaResource {
      * @return Status code indicating success or failure.
      */
     @GET
-    @Path("/discs/{barcode}")
+    @Path("/discs/{barcode}/{token}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDisc(@PathParam("barcode") String barcode, Token token) {
+    public Response getDisc(@PathParam("barcode") String barcode, @PathParam("token") Token token) {
         if (!AuthServiceImpl.tokenIsValid(token)) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
         }
@@ -191,9 +191,9 @@ public class MediaResource {
      * @return Response indicating success or failure.
      */
     @GET
-    @Path("/discs")
+    @Path("/discs/{token}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDiscs(Token token) {
+    public Response getDiscs(@PathParam("token") Token token) {
         if (!AuthServiceImpl.tokenIsValid(token)) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
         }
