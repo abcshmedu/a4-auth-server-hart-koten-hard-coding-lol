@@ -14,6 +14,9 @@ import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * just testing whether the auth works.
+ */
 public class MediaServiceTest {
 
     private final User kevin = new User("Chicksterminator", "Kevin", "Penopt", "20quickSniperLord05", 12);
@@ -30,7 +33,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * before the tests start.
      */
     @Before
     public void initialze() {
@@ -42,7 +45,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should create a new book.
      */
     @Test
     public void createBookTestSuccess() {
@@ -54,7 +57,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * user is not allowed to create a new book.
      */
     @Test
     public void createBookTestFail() {
@@ -64,7 +67,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * gets book inserted in inittialze.
      */
     @Test
     public void getBookTestSuccess() {
@@ -74,7 +77,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * user is not allowed to get a book.
      */
     @Test
     public void getBookTestFail() {
@@ -84,7 +87,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should return all books which is just one.
      */
     @Test
     public void getBooksTestSuccess() {
@@ -94,7 +97,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * user is not allowed to get all books.
      */
     @Test
     public void getBooksTestFail() {
@@ -104,7 +107,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should update the given book user is allowed.
      */
     @Test
     public void updateBookTestSuccess() {
@@ -114,7 +117,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * userr is not allowed to update a book.
      */
     @Test
     public void updateBookTestFail() {
@@ -124,7 +127,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should create a new disc user is allowed to do it.
      */
     @Test
     public void createDisTestSuccess() {
@@ -135,7 +138,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * user is not allowed to create a new disc should not work.
      */
     @Test
     public void createDiscTestFail() {
@@ -145,7 +148,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should return a disc from the list useris allowed to do it.
      */
     @Test
     public void getDiscTestSuccess() {
@@ -155,7 +158,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * user is not allowed to get a disc here should not work.
      */
     @Test
     public void getDiscTestFail() {
@@ -165,7 +168,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should return all disc user is allowed.
      */
     @Test
     public void getDiscsTestSuccess() {
@@ -175,7 +178,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should not work to get all discs user is not allowed to do it.
      */
     @Test
     public void getDiscsTestFail() {
@@ -185,7 +188,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should update the give ndisc user is allowed to do it.
      */
     @Test
     public void updateDiscTestSuccess() {
@@ -195,7 +198,7 @@ public class MediaServiceTest {
 
 
     /**
-     *
+     * should not work user is not allowed to update a disc.
      */
     @Test
     public void updateDiscTestFail() {
