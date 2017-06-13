@@ -1,6 +1,5 @@
 package edu.hm.cs.swa.authorization;
 
-import edu.hm.cs.swa.controller.MediaServiceResult;
 import edu.hm.cs.swa.model.Token;
 import edu.hm.cs.swa.model.User;
 
