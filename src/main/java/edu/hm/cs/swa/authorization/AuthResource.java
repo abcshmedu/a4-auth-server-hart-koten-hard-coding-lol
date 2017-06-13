@@ -41,7 +41,7 @@ public class AuthResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(User user) {
-        MediaServiceResult msr = as.login(user);
+        AuthServiceResult msr = as.login(user);
         return Response.status(msr.getCode()).build();
     }
 }

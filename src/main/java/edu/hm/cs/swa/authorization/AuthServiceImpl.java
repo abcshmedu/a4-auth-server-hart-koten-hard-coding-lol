@@ -32,19 +32,19 @@ public class AuthServiceImpl {
      * @return Status code.
      */
     public AuthServiceResult login(final User user) {
-        final MediaServiceResult result;
+        final AuthServiceResult result;
 
         System.out.println("Login requested.");
 
         if (user == null) {
-            result = MediaServiceResult.AUTHORIZATION;
+            result = AuthServiceResult.ERROR;
         } else if (!userHashSet.contains(user)) {
-            result = MediaServiceResult.AUTHORIZATION;
+            result = AuthServiceResult.NAME_PASSWORD;
         } else if (user.getUserToken() != null) {
-            result = MediaServiceResult.OK;
+            result = AuthServiceResult.OK;
         } else {
             user.setUserToken(generateToken(user));
-            result = MediaServiceResult.OK;
+            result = AuthServiceResult.OK;
         }
         return result;
     }
@@ -66,7 +66,7 @@ public class AuthServiceImpl {
         String tokenstr = userName + "-" + passAndTimeHash + "-" + firstName + "-" + lastName + "-" + age;
         Token token = new Token(tokenstr);
         user.setUserToken(token);
-        this.tokenHashSet.add(token);
+        tokenHashSet.add(token);
         return token;
     }
 
