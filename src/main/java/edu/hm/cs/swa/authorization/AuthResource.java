@@ -1,6 +1,6 @@
 package edu.hm.cs.swa.authorization;
 
-import edu.hm.cs.swa.controller.MediaServiceResult;
+import edu.hm.cs.swa.model.Token;
 import edu.hm.cs.swa.model.User;
 
 import javax.ws.rs.Consumes;
@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
  * Created by CaptainEinsicht on 23.05.2017.
  * Alle Rechte vorbehalten bei Missbrauch wird zurück Missbraucht
  */
-
 
 @Path("/authentication")
 public class AuthResource {
@@ -43,5 +42,21 @@ public class AuthResource {
     public Response login(User user) {
         AuthServiceResult msr = as.login(user);
         return Response.status(msr.getCode()).build();
+    }
+
+
+    /**
+     * Checks if an token is valid or not.
+     *
+     * @param token the token which needs to be checked.
+     * @return some good or bad respone.
+     */
+    @POST
+    @Path("/valid")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response validToken(Token token) {
+        Response response = as.validToken(token);
+        return response;
     }
 }

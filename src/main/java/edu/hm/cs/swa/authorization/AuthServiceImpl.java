@@ -3,6 +3,7 @@ package edu.hm.cs.swa.authorization;
 import edu.hm.cs.swa.model.Token;
 import edu.hm.cs.swa.model.User;
 
+import javax.ws.rs.core.Response;
 import java.util.HashSet;
 
 /**
@@ -15,7 +16,7 @@ public class AuthServiceImpl {
 
     private static HashSet<Token> tokenHashSet = new HashSet<>();
 
-    private static final int fifteenMin = 90000;
+    private static final int FIFTEENMIN = 90000;
 
 
     /**
@@ -80,7 +81,7 @@ public class AuthServiceImpl {
     public static boolean tokenIsValid(Token token) {
         boolean firstcheck = tokenHashSet.contains(token);
         boolean secondCheck = false;
-        if (System.currentTimeMillis() - token.getTimestamp() < fifteenMin) {
+        if (System.currentTimeMillis() - token.getTimestamp() < FIFTEENMIN) {
             secondCheck = true;
         }
         return firstcheck && secondCheck;
@@ -96,4 +97,14 @@ public class AuthServiceImpl {
         this.userHashSet.add(user);
     }
 
+
+    /**
+     * checks whether the given token is valid ot not.
+     *
+     * @param token the token to check.
+     * @return good or bad response.
+     */
+    public Response validToken(final Token token) {
+        Response.accepted();
+    }
 }
