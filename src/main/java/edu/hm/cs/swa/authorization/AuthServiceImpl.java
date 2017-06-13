@@ -32,7 +32,7 @@ public class AuthServiceImpl {
      * @param user User that requests something.
      * @return Status code.
      */
-    public MediaServiceResult login(final User user) {
+    public AuthServiceResult login(final User user) {
         final MediaServiceResult result;
 
         System.out.println("Login requested.");
@@ -75,7 +75,7 @@ public class AuthServiceImpl {
     /**
      * check token.
      *
-     * @param token some token
+     * @param token some token.
      * @return
      */
     public static boolean tokenIsValid(Token token) {
